@@ -1,109 +1,43 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue';
-import App from './App';
-import router from './router';
-import store from './store';
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-default/index.css';
-import 'assets/custom-theme/index.css'; // https://github.com/PanJiaChen/custom-element-theme
-import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
-import 'normalize.css/normalize.css';
-import 'styles/index.scss';
-import 'components/Icon-svg/index';
-import 'assets/iconfont/iconfont';
-import * as filters from './filters';
-import Multiselect from 'vue-multiselect';
-import Sticky from 'components/Sticky';
-import 'vue-multiselect/dist/vue-multiselect.min.css';
-import vueWaves from './directive/waves';
-import vueSticky from './directive/sticky';
-import errLog from 'store/errLog';
-import './mock/index.js';
-// import './styles/mixin.scss';
+import Vue from 'vue'
 
-// register globally
-Vue.component('multiselect', Multiselect);
-Vue.component('Sticky', Sticky);
-Vue.use(ElementUI);
-Vue.use(vueWaves);
-Vue.use(vueSticky);
+import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
-// register global utility filters.
-Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
-});
+import '@/styles/index.scss' // global css
 
-function hasPermission(roles, permissionRoles) {
-  if (roles.indexOf('admin') >= 0) return true;
-  return roles.some(role => permissionRoles.indexOf(role) >= 0)
-}
-// register global progress.
-const whiteList = ['/login', '/authredirect', '/reset', '/sendpwd'];// 不重定向白名单
-router.beforeEach((to, from, next) => {
-  NProgress.start();
-  if (store.getters.token) {
-    if (to.path === '/login') {
-      next({ path: '/' });
-    } else {
-      if (to.meta && to.meta.role) {
-        if (hasPermission(store.getters.roles, to.meta.role)) {
-          next();
-        } else {
-          next('/401');
-        }
-      } else {
-        next();
-      }
-    }
-  } else {
-    if (whiteList.indexOf(to.path) !== -1) {
-      next()
-    } else {
-      next('/login')
-    }
-  }
-});
+import App from './App'
+import store from './store'
+import router from './router'
 
-router.afterEach(() => {
-  NProgress.done();
-});
+import '@/icons' // icon
+import '@/permission' // permission control
 
-// window.onunhandledrejection = e => {
-//     console.log('unhandled', e.reason, e.promise);
-//     e.preventDefault()
-// };
-
-// 生产环境错误日志
-if (process.env === 'production') {
-  Vue.config.errorHandler = function(err, vm) {
-    console.log(err, window.location.href);
-    errLog.pushLog({
-      err,
-      url: window.location.href,
-      vm
-    })
-  };
+/**
+ * If you don't want to use mock-server
+ * you want to use MockJs for mock api
+ * you can execute: mockXHR()
+ *
+ * Currently MockJs will be used in the production environment,
+ * please remove it before going online ! ! !
+ */
+if (process.env.NODE_ENV === 'production') {
+  const { mockXHR } = require('../mock')
+  mockXHR()
 }
 
-// window.onerror = function (msg, url, lineNo, columnNo, error) {
-//     console.log('window')
-// };
-//
-// console.error = (function (origin) {
-//     return function (errorlog) {
-//         // handler();//基于业务的日志记录及数据报错
-//         console.log('console'+errorlog)
-//         origin.call(console, errorlog);
-//     }
-// })(console.error);
+// set ElementUI lang to EN
+Vue.use(ElementUI, { locale })
+// 如果想要中文版 element-ui，按如下方式声明
+// Vue.use(ElementUI)
+
+Vue.config.productionTip = false
 
 new Vue({
+  el: '#app',
   router,
   store,
   render: h => h(App)
-}).$mount('#app');
-
-
+})
