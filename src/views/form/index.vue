@@ -14,12 +14,7 @@
       </el-form-item>
 
       <el-form-item label="正文">
-<!--        <el-input type="textarea" :rows="15" placeholder="请输入内容" v-model="textarea">-->
-<!--        </el-input>-->
-        <tinymce-editor v-model="msg"
-                        :disabled="disabled"
-                        @onClick="onClick"
-                        ref="editor"></tinymce-editor>
+
       </el-form-item>
 
       <el-form-item label="文章首图">
@@ -54,13 +49,11 @@
 
 <script>
 
-  import TinymceEditor from './tinymce-editor'
+
 
 
   export default {
-    components: {
-      TinymceEditor
-    },
+
     data() {
       return {
         form: {
