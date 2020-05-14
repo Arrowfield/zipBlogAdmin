@@ -12,11 +12,7 @@ export const constantRoutes = [
     hidden: true
   },
 
-  {
-    path: '/404',
-    component: () => import('@/views/404'),
-    hidden: true
-  },
+
 
   {
     path: '/',
@@ -26,7 +22,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '控制台', icon: 'dashboard' }
+      meta: { title: '后台首页', icon: 'dashboard' }
     }]
   },
 
@@ -40,20 +36,16 @@ export const constantRoutes = [
         path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
-        meta: { title: '添加文章', icon: 'form' }
+        meta: { title: '文章', icon: 'form' }
       }
     ]
   },
 
+
   {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: '/',
-        meta: { title: '官方链接', icon: 'link' }
-      }
-    ]
+    path: '/404',
+    component: () => import('@/views/404'),
+    hidden: true
   },
 
   { path: '*', redirect: '/404', hidden: true }

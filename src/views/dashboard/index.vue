@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    
+    <h2>角色：超级管理员</h2>
   </div>
 </template>
 
@@ -20,7 +20,7 @@ export default {
 <style lang="scss" scoped>
 .dashboard {
   &-container {
-    margin: 30px;
+    padding: 20px;
   }
   &-text {
     font-size: 30px;
