@@ -16,18 +16,16 @@
       <el-form-item label="正文">
 <!--        <el-input type="textarea" :rows="15" placeholder="请输入内容" v-model="textarea">-->
 <!--        </el-input>-->
-        <editor v-model="myValue"
-                :init="init"
-                :disabled="disabled"
-                @onClick="onClick">
-        </editor>
+        <tinymce-editor v-model="msg"
+                        :disabled="disabled"
+                        @onClick="onClick"
+                        ref="editor"></tinymce-editor>
       </el-form-item>
 
       <el-form-item label="文章首图">
         <el-upload class="upload-demo" drag action="https://jsonplaceholder.typicode.com/posts/" multiple>
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-          <!-- <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div> -->
         </el-upload>
       </el-form-item>
 
@@ -56,22 +54,12 @@
 
 <script>
 
-  import tinymce from 'tinymce/tinymce'
-  import Editor from '@tinymce/tinymce-vue'
-  // import 'tinymce/themes/modern/theme'
-  import 'tinymce/plugins/image'
-  import 'tinymce/plugins/media'
-  import 'tinymce/plugins/table'
-  import 'tinymce/plugins/lists'
-  import 'tinymce/plugins/contextmenu'
-  import 'tinymce/plugins/wordcount'
-  import 'tinymce/plugins/colorpicker'
-  import 'tinymce/plugins/textcolor'
+  import TinymceEditor from './tinymce-editor'
 
 
   export default {
     components: {
-      Editor
+      TinymceEditor
     },
     data() {
       return {
@@ -102,15 +90,10 @@
             type: 'danger'
           }
         ],
-        myValue:"",
-        init: {
-          //language_url: '/static/tinymce/langs/zh_CN.js',
-          language: 'zh_CN',//语言
-          //skin_url: '/static/tinymce/skins/lightgray',
-          height: 300,
-          branding: false,
-          menubar: false,
-        }
+        value1:"",
+        radio:0,
+        msg: 'Welcome to Use Tinymce Editor',
+        disabled: false
       }
     },
     methods: {
@@ -122,10 +105,20 @@
           message: 'cancel!',
           type: 'warning'
         })
+      },
+      //鼠标单击的事件
+      onClick(e, editor) {
+        console.log('Element clicked')
+        console.log(e)
+        console.log(editor)
+      },
+      //清空内容
+      clear() {
+        this.$refs.editor.clear()
       }
     },
     mounted() {
-      tinymce.init({})
+
     }
   }
 
