@@ -2,10 +2,10 @@
   <div class="app-container">
     <el-form ref="form" :model="form" label-width="120px">
       <el-form-item label="文章标题">
-        <el-input v-model="form.articleTitle" />
+        <el-input v-model="form.articleTitle" placeholder="请输入标题"/>
       </el-form-item>
       <el-form-item label="文章摘要">
-        <el-input v-model="form.articleAbstract" />
+        <el-input v-model="form.articleAbstract" placeholder="请输入文章摘要"/>
       </el-form-item>
       <el-form-item label="文章标签">
         <el-tag class="tag" v-for="tag in tags" :key="tag.name" closable :type="tag.type">
@@ -14,8 +14,13 @@
       </el-form-item>
 
       <el-form-item label="正文">
-        <el-input type="textarea" :rows="15" placeholder="请输入内容" v-model="textarea">
-        </el-input>
+<!--        <el-input type="textarea" :rows="15" placeholder="请输入内容" v-model="textarea">-->
+<!--        </el-input>-->
+        <editor v-model="myValue"
+                :init="init"
+                :disabled="disabled"
+                @onClick="onClick">
+        </editor>
       </el-form-item>
 
       <el-form-item label="文章首图">
@@ -27,7 +32,7 @@
       </el-form-item>
 
       <el-form-item label="文章访问路径">
-        <el-input v-model="form.articleAbstract" />
+        <el-input v-model="form.articleAbstract" placeholder="请输入内容"/>
       </el-form-item>
 
       <el-form-item label="创建时间">
@@ -50,7 +55,24 @@
 </template>
 
 <script>
+
+  import tinymce from 'tinymce/tinymce'
+  import Editor from '@tinymce/tinymce-vue'
+  // import 'tinymce/themes/modern/theme'
+  import 'tinymce/plugins/image'
+  import 'tinymce/plugins/media'
+  import 'tinymce/plugins/table'
+  import 'tinymce/plugins/lists'
+  import 'tinymce/plugins/contextmenu'
+  import 'tinymce/plugins/wordcount'
+  import 'tinymce/plugins/colorpicker'
+  import 'tinymce/plugins/textcolor'
+
+
   export default {
+    components: {
+      Editor
+    },
     data() {
       return {
         form: {
@@ -58,7 +80,8 @@
           articleAbstract: "",
           articleTags: []
         },
-        tags: [{
+        tags: [
+          {
             name: '标签一',
             type: ''
           },
@@ -78,7 +101,16 @@
             name: '标签五',
             type: 'danger'
           }
-        ]
+        ],
+        myValue:"",
+        init: {
+          //language_url: '/static/tinymce/langs/zh_CN.js',
+          language: 'zh_CN',//语言
+          //skin_url: '/static/tinymce/skins/lightgray',
+          height: 300,
+          branding: false,
+          menubar: false,
+        }
       }
     },
     methods: {
@@ -91,6 +123,9 @@
           type: 'warning'
         })
       }
+    },
+    mounted() {
+      tinymce.init({})
     }
   }
 
