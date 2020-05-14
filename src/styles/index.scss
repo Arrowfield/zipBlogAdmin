@@ -60,6 +60,9 @@ div:focus {
 }
 
 // main-container global css
-.app-container {
-  padding: 20px;
+.app-container ,.dashboard-container{
+  margin: 30px;
+  padding:20px;
+  background-color: white;
+  box-shadow: 0 0 1rem rgba(161,177,204,.4);
 }
