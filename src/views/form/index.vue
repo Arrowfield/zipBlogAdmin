@@ -12,22 +12,18 @@
           {{tag.name}}
         </el-tag>
       </el-form-item>
-
       <el-form-item label="正文">
         <tinymce :height="300" v-model="content" ></tinymce>
       </el-form-item>
-
       <el-form-item label="文章首图">
         <el-upload class="upload-demo" drag action="https://jsonplaceholder.typicode.com/posts/" multiple>
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
         </el-upload>
       </el-form-item>
-
       <el-form-item label="文章访问路径">
         <el-input v-model="form.articleAbstract" placeholder="请输入内容"/>
       </el-form-item>
-
       <el-form-item label="创建时间">
         <el-date-picker v-model="value1" type="date" placeholder="选择日期">
         </el-date-picker>
@@ -38,6 +34,9 @@
           <el-radio :label="6">备选项</el-radio>
           <el-radio :label="9">备选项</el-radio>
         </el-radio-group>
+      </el-form-item>
+      <el-form-item label="个人简介">
+        <markdown-editor v-model="contentMark" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">立即添加文章</el-button>
@@ -52,13 +51,16 @@
 
 
   import Tinymce from '@/components/Tinymce'
+  import MarkdownEditor from '@/components/MarkdownEditor'
   export default {
     components:{
-      Tinymce
+      Tinymce,
+      MarkdownEditor
     },
 
     data() {
       return {
+        contentMark:"",
         content:"",
         form: {
           articleTitle: "",
