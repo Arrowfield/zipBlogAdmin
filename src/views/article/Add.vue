@@ -106,7 +106,7 @@
       onSubmit() {
         //this.$message('submit!')
         console.log(this.form)
-        addArticle(this.form).then((res)=>{
+        addArticle().then((res)=>{
           console.log(res)
         })
       },

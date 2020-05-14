@@ -2,8 +2,8 @@ import request from '@/utils/request'
 
 export function addArticle(params) {
   return request({
-    url: '/add',
-    method: 'post',
+    url: '/user/3',
+    method: 'get',
     params
   })
 }
