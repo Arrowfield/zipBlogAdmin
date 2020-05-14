@@ -8,12 +8,28 @@
         <el-input v-model="form.articleAbstract" placeholder="请输入文章摘要"/>
       </el-form-item>
       <el-form-item label="文章标签">
-        <el-tag class="tag" v-for="tag in tags" :key="tag.name" closable :type="tag.type">
-          {{tag.name}}
-        </el-tag>
+
+
+
+        <el-select
+          v-model="form.articleTags"
+          multiple
+          filterable
+          allow-create
+          default-first-option
+          placeholder="请选择文章标签">
+          <el-option
+            v-for="item in articleTags"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+
+
       </el-form-item>
       <el-form-item label="正文">
-        <tinymce :height="300" v-model="content" ></tinymce>
+        <tinymce :height="300" v-model="form.content" ></tinymce>
       </el-form-item>
       <el-form-item label="文章首图">
         <el-upload class="upload-demo" drag action="https://jsonplaceholder.typicode.com/posts/" multiple>
@@ -22,21 +38,20 @@
         </el-upload>
       </el-form-item>
       <el-form-item label="文章访问路径">
-        <el-input v-model="form.articleAbstract" placeholder="请输入内容"/>
+        <el-input v-model="form.articleLink" placeholder="请输入内容"/>
       </el-form-item>
       <el-form-item label="创建时间">
-        <el-date-picker v-model="value1" type="date" placeholder="选择日期">
+        <el-date-picker v-model="form.createTime" type="date" placeholder="选择日期">
         </el-date-picker>
       </el-form-item>
       <el-form-item label="文章状态">
-        <el-radio-group v-model="radio">
-          <el-radio :label="3">备选项</el-radio>
-          <el-radio :label="6">备选项</el-radio>
-          <el-radio :label="9">备选项</el-radio>
+        <el-radio-group v-model="form.radio">
+          <el-radio :label="0">已发布</el-radio>
+          <el-radio :label="1">草稿</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="个人简介">
-        <markdown-editor v-model="contentMark" />
+        <markdown-editor v-model="form.contentMark" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">立即添加文章</el-button>
@@ -60,45 +75,35 @@
 
     data() {
       return {
-        contentMark:"",
-        content:"",
         form: {
           articleTitle: "",
           articleAbstract: "",
-          articleTags: []
+          articleTags:[],
+          content:"",
+          contentMark:"",
+          radio:0,
+          disabled: false,
+          articleLink:"",
+          createTime:""
         },
-        tags: [
+        articleTags: [
           {
-            name: '标签一',
-            type: ''
-          },
-          {
-            name: '标签二',
-            type: 'success'
-          },
-          {
-            name: '标签三',
-            type: 'info'
-          },
-          {
-            name: '标签四',
-            type: 'warning'
-          },
-          {
-            name: '标签五',
-            type: 'danger'
+            value: 'HTML',
+            label: 'HTML'
+          }, {
+            value: 'CSS',
+            label: 'CSS'
+          }, {
+            value: 'JavaScript',
+            label: 'JavaScript'
           }
         ],
-        value1:"",
-        radio:0,
-        msg: 'Welcome to Use Tinymce Editor',
-        disabled: false,
-        textArea:""
       }
     },
     methods: {
       onSubmit() {
-        this.$message('submit!')
+        //this.$message('submit!')
+        console.log(this.form)
       },
       onCancel() {
         this.$message({
