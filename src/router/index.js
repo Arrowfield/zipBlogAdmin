@@ -7,14 +7,6 @@ import Layout from '@/layout'
 
 export const constantRoutes = [
   {
-    path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
-  },
-
-
-
-  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -22,11 +14,9 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '后台首页', icon: 'dashboard' }
+      meta: {title: '后台首页', icon: 'dashboard'}
     }]
   },
-
-
 
   {
     path: '/form',
@@ -36,24 +26,18 @@ export const constantRoutes = [
         path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
-        meta: { title: '文章', icon: 'form' }
+        meta: {title: '文章', icon: 'form'}
       }
     ]
   },
-
-
-  {
-    path: '/404',
-    component: () => import('@/views/404'),
-    hidden: true
-  },
-
-  { path: '*', redirect: '/404', hidden: true }
+  {path: '/login', component: () => import('@/views/login/index'), hidden: true},
+  {path: '/404', component: () => import('@/views/404'), hidden: true},
+  {path: '*', redirect: '/404', hidden: true}
 ]
 
 const createRouter = () => new Router({
   mode: 'history',
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })
 
