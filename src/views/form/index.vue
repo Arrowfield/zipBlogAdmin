@@ -51,14 +51,14 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="个人简介">
-
+        <markdown-editor v-model="form.contentMark" />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">立即添加文章</el-button>
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
-    <markdown-editor v-model="form.contentMark" :height="300"/>
+
   </div>
 </template>
 
