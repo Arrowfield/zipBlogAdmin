@@ -14,7 +14,7 @@
       </el-form-item>
 
       <el-form-item label="正文">
-
+        <el-input type="textarea" v-model="textArea" :rows="15" placeholder="请输入内容"/>
       </el-form-item>
 
       <el-form-item label="文章首图">
@@ -86,7 +86,8 @@
         value1:"",
         radio:0,
         msg: 'Welcome to Use Tinymce Editor',
-        disabled: false
+        disabled: false,
+        textArea:""
       }
     },
     methods: {
