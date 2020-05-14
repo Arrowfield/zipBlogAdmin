@@ -64,10 +64,10 @@
 
 <script>
 
-
-
   import Tinymce from '@/components/Tinymce'
   import MarkdownEditor from '@/components/MarkdownEditor'
+  import { addArticle } from "@/api/article";
+
   export default {
     name:"Add",
     components:{
@@ -106,6 +106,9 @@
       onSubmit() {
         //this.$message('submit!')
         console.log(this.form)
+        addArticle(this.form).then((res)=>{
+          console.log(res)
+        })
       },
       onCancel() {
         this.$message({

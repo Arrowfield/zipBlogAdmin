@@ -68,49 +68,49 @@ export const constantRoutes = [
       {
         path: 'index',
         component: () => import('@/views/tool/Skin'),
-        name: 'icons',
+        name: 'Index',
         meta: {title: '偏好设置', icon: 'tree'}
       },
       {
         path: 'skin',
         component: () => import('@/views/tool/Skin'),
-        name: 'icons',
+        name: 'Skin',
         meta: {title: '皮肤管理', icon: 'tree'}
       },
       {
-        path: 'skin',
+        path: 'class',
         component: () => import('@/views/tool/Skin'),
-        name: 'icons',
+        name: 'Class',
         meta: {title: '分类管理', icon: 'tree'}
       },
       {
-        path: 'skin',
+        path: 'nav',
         component: () => import('@/views/tool/Skin'),
-        name: 'icons',
+        name: 'Nav',
         meta: {title: '导航管理', icon: 'tree'}
       },
       {
-        path: 'skin',
+        path: 'link',
         component: () => import('@/views/tool/Skin'),
-        name: 'icons',
+        name: 'Link',
         meta: {title: '链接管理', icon: 'tree'}
       },
       {
-        path: 'skin',
+        path: 'user',
         component: () => import('@/views/tool/Skin'),
-        name: 'icons',
+        name: 'User',
         meta: {title: '用户管理', icon: 'tree'}
       },
       {
-        path: 'skin',
+        path: 'plugin',
         component: () => import('@/views/tool/Skin'),
-        name: 'icons',
+        name: 'Plugin',
         meta: {title: '插件管理', icon: 'tree'}
       },
       {
-        path: 'skin',
+        path: 'others',
         component: () => import('@/views/tool/Skin'),
-        name: 'icons',
+        name: 'Others',
         meta: {title: '其他', icon: 'tree'}
       },
     ]
@@ -121,7 +121,7 @@ export const constantRoutes = [
     children: [{
       path: 'index',
       component: () => import('@/views/comment/Index'),
-      name: 'icons',
+      name: 'About',
       meta: {title: '关于', icon: 'table'}
     }]
   },
@@ -138,10 +138,10 @@ const createRouter = () => new Router({
 
 const router = createRouter()
 
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
+
 export function resetRouter() {
   const newRouter = createRouter()
-  router.matcher = newRouter.matcher // reset router
+  router.matcher = newRouter.matcher
 }
 
 export default router
